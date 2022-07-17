@@ -1,0 +1,14 @@
+C:\Users\zulhisham\Desktop\etmy\Marking2\Marking2\bin\Marking2.dll.config
+C:\Users\zulhisham\Desktop\etmy\Marking2\Marking2\bin\Marking2.dll
+C:\Users\zulhisham\Desktop\etmy\Marking2\Marking2\bin\Marking2.pdb
+C:\Users\zulhisham\Desktop\etmy\Marking2\Marking2\obj\Release\Marking2.csprojAssemblyReference.cache
+C:\Users\zulhisham\Desktop\etmy\Marking2\Marking2\obj\Release\Marking2.csproj.CoreCompileInputs.cache
+C:\Users\zulhisham\Desktop\etmy\Marking2\Marking2\obj\Release\Marking2.dll
+C:\Users\zulhisham\Desktop\etmy\Marking2\Marking2\obj\Release\Marking2.pdb
+C:\Users\User\source\repos\epson\Marking2\Marking2\bin\Marking2.dll.config
+C:\Users\User\source\repos\epson\Marking2\Marking2\bin\Marking2.dll
+C:\Users\User\source\repos\epson\Marking2\Marking2\bin\Marking2.pdb
+C:\Users\User\source\repos\epson\Marking2\Marking2\obj\Release\Marking2.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\epson\Marking2\Marking2\obj\Release\Marking2.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\epson\Marking2\Marking2\obj\Release\Marking2.dll
+C:\Users\User\source\repos\epson\Marking2\Marking2\obj\Release\Marking2.pdb

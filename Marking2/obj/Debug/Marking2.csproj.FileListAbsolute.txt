@@ -1,0 +1,19 @@
+C:\Users\c010059\Desktop\Marking2\Marking2\bin\Marking2.dll
+C:\Users\c010059\Desktop\Marking2\Marking2\bin\Marking2.pdb
+C:\Users\c010059\Desktop\Marking2\Marking2\obj\Debug\Marking2.dll
+C:\Users\c010059\Desktop\Marking2\Marking2\obj\Debug\Marking2.pdb
+G:\C-Sharp\Solution\Marking2\Marking2\bin\Marking2.dll
+G:\C-Sharp\Solution\Marking2\Marking2\bin\Marking2.pdb
+G:\C-Sharp\Solution\Marking2\Marking2\obj\Debug\ResolveAssemblyReference.cache
+G:\C-Sharp\Solution\Marking2\Marking2\obj\Debug\Marking2.dll
+G:\C-Sharp\Solution\Marking2\Marking2\obj\Debug\Marking2.pdb
+C:\Documents and Settings\EPMY\デスクトップ\Marking2\Marking2\bin\Marking2.dll
+C:\Documents and Settings\EPMY\デスクトップ\Marking2\Marking2\bin\Marking2.pdb
+C:\Documents and Settings\EPMY\デスクトップ\Marking2\Marking2\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\EPMY\デスクトップ\Marking2\Marking2\obj\Debug\Marking2.dll
+C:\Documents and Settings\EPMY\デスクトップ\Marking2\Marking2\obj\Debug\Marking2.pdb
+C:\Users\Zulhisham\Desktop\epson\Marking2\Marking2\bin\Marking2.dll
+C:\Users\Zulhisham\Desktop\epson\Marking2\Marking2\bin\Marking2.pdb
+C:\Users\Zulhisham\Desktop\epson\Marking2\Marking2\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Zulhisham\Desktop\epson\Marking2\Marking2\obj\Debug\Marking2.dll
+C:\Users\Zulhisham\Desktop\epson\Marking2\Marking2\obj\Debug\Marking2.pdb

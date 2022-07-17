@@ -1,0 +1,35 @@
+C:\Documents and Settings\EPMY\デスクトップ\dbgMarking2\dbgMarking2\bin\Debug\dbgMarking2.exe
+C:\Documents and Settings\EPMY\デスクトップ\dbgMarking2\dbgMarking2\bin\Debug\dbgMarking2.pdb
+C:\Documents and Settings\EPMY\デスクトップ\dbgMarking2\dbgMarking2\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\EPMY\デスクトップ\dbgMarking2\dbgMarking2\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Documents and Settings\EPMY\デスクトップ\dbgMarking2\dbgMarking2\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\EPMY\デスクトップ\dbgMarking2\dbgMarking2\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\EPMY\デスクトップ\dbgMarking2\dbgMarking2\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\EPMY\デスクトップ\dbgMarking2\dbgMarking2\obj\x86\Debug\dbgMarking2.exe
+C:\Documents and Settings\EPMY\デスクトップ\dbgMarking2\dbgMarking2\obj\x86\Debug\dbgMarking2.pdb
+G:\C-Sharp\Solution\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\dbgMarking2.exe
+G:\C-Sharp\Solution\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\dbgMarking2.pdb
+G:\C-Sharp\Solution\Marking2\dbgMarking2\dbgMarking2\bin\Debug\dbgMarking2.exe
+G:\C-Sharp\Solution\Marking2\dbgMarking2\dbgMarking2\bin\Debug\dbgMarking2.pdb
+G:\C-Sharp\Solution\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\dbgMarking2.csprojResolveAssemblyReference.cache
+G:\C-Sharp\Solution\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+G:\C-Sharp\Solution\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+G:\C-Sharp\Solution\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\dbgMarking2.csproj.GenerateResource.Cache
+C:\Users\Zulhisham\Desktop\epson\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\dbgMarking2.exe
+C:\Users\Zulhisham\Desktop\epson\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\dbgMarking2.pdb
+C:\Users\Zulhisham\Desktop\epson\Marking2\dbgMarking2\dbgMarking2\bin\Debug\dbgMarking2.exe
+C:\Users\Zulhisham\Desktop\epson\Marking2\dbgMarking2\dbgMarking2\bin\Debug\dbgMarking2.pdb
+C:\Users\Zulhisham\Desktop\epson\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Zulhisham\Desktop\epson\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\Zulhisham\Desktop\epson\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Zulhisham\Desktop\epson\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Zulhisham\Desktop\epson\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\User\source\repos\epson\Marking2\dbgMarking2\dbgMarking2\bin\Debug\dbgMarking2.exe
+C:\Users\User\source\repos\epson\Marking2\dbgMarking2\dbgMarking2\bin\Debug\dbgMarking2.pdb
+C:\Users\User\source\repos\epson\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\dbgMarking2.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\epson\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\User\source\repos\epson\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\User\source\repos\epson\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\dbgMarking2.csproj.GenerateResource.cache
+C:\Users\User\source\repos\epson\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\dbgMarking2.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\epson\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\dbgMarking2.exe
+C:\Users\User\source\repos\epson\Marking2\dbgMarking2\dbgMarking2\obj\x86\Debug\dbgMarking2.pdb

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\User\source\repos\epson\Marking2\Marking2\bin\app.publish\</_PublishTargetUrl>
+    <History>True|2022-06-25T15:12:56.2158416Z;True|2021-05-30T15:55:45.0494978+08:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Marking2.dll">
+      <publishTime>06/25/2022 23:12:55</publishTime>
+    </File>
+    <File Include="bin/Marking2.pdb">
+      <publishTime>06/25/2022 23:12:55</publishTime>
+    </File>
+    <File Include="Marking2.asmx">
+      <publishTime>01/28/2015 11:14:59</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>06/25/2022 23:12:55</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
