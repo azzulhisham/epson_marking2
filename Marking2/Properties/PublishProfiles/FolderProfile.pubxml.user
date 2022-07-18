@@ -5,14 +5,14 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\User\source\repos\epson\Marking2\Marking2\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2022-07-18T02:16:00.2713072Z;True|2022-06-25T23:12:56.2158416+08:00;True|2021-05-30T15:55:45.0494978+08:00;</History>
+    <History>True|2022-07-18T04:52:02.1821074Z;True|2022-07-18T11:34:50.7668930+08:00;True|2022-07-18T10:16:00.2713072+08:00;True|2022-06-25T23:12:56.2158416+08:00;True|2021-05-30T15:55:45.0494978+08:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Marking2.dll">
-      <publishTime>07/18/2022 10:15:59</publishTime>
+      <publishTime>07/18/2022 12:52:01</publishTime>
     </File>
     <File Include="bin/Marking2.pdb">
-      <publishTime>07/18/2022 10:15:59</publishTime>
+      <publishTime>07/18/2022 12:52:01</publishTime>
     </File>
     <File Include="Marking2.asmx">
       <publishTime>01/28/2015 11:14:59</publishTime>

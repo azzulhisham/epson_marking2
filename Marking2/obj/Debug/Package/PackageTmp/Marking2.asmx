@@ -1,1 +1,0 @@
-﻿<%@ WebService Language="C#" CodeBehind="Marking2.asmx.cs" Class="Marking2.MarkingCode" %>

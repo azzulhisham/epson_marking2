@@ -17,3 +17,10 @@ C:\Users\Zulhisham\Desktop\epson\Marking2\Marking2\bin\Marking2.pdb
 C:\Users\Zulhisham\Desktop\epson\Marking2\Marking2\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Zulhisham\Desktop\epson\Marking2\Marking2\obj\Debug\Marking2.dll
 C:\Users\Zulhisham\Desktop\epson\Marking2\Marking2\obj\Debug\Marking2.pdb
+C:\Users\User\source\repos\epson\Marking2\Marking2\bin\Marking2.dll.config
+C:\Users\User\source\repos\epson\Marking2\Marking2\bin\Marking2.dll
+C:\Users\User\source\repos\epson\Marking2\Marking2\bin\Marking2.pdb
+C:\Users\User\source\repos\epson\Marking2\Marking2\obj\Debug\Marking2.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\epson\Marking2\Marking2\obj\Debug\Marking2.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\epson\Marking2\Marking2\obj\Debug\Marking2.dll
+C:\Users\User\source\repos\epson\Marking2\Marking2\obj\Debug\Marking2.pdb

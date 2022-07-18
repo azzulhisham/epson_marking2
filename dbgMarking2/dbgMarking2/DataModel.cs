@@ -26,17 +26,25 @@ namespace WindowsFormsApplication1
         public string a01_IMI { get; set; }
         public string a02_MData1 { get; set; }
         public string a03_MData2 { get; set; }
+        public string a04_LotNo { get; set; }
+
     }
 
     public class DataModel
     {
         static string GetConnString()
         {
+            //string sConnStr =
+            //        "Server=" + @"172.16.59.254\SQLEXPRESS" + "; " +
+            //        "DataBase=" + "Marking" + "; " +
+            //        "user id=" + "vb-sql" + ";" +
+            //        "password=" + "Anyn0m0us";
+
             string sConnStr =
-                    "Server=" + @"172.16.59.254\SQLEXPRESS" + "; " +
-                    "DataBase=" + "Marking" + "; " +
-                    "user id=" + "vb-sql" + ";" +
-                    "password=" + "Anyn0m0us";
+"Server=" + @"DESKTOP-TLVFD7V\SQLEXPRESS" + "; " +
+"DataBase=" + "Marking" + "; " +
+"user id=" + "sa" + ";" +
+"password=" + "Az@HoePinc0615";
 
             return sConnStr;
         }
@@ -73,6 +81,37 @@ namespace WindowsFormsApplication1
                     }
                 }
 
+            }
+            catch (Exception Ex)
+            {
+                string msg = Ex.Message;
+                _ret = -1;
+            }
+            finally
+            {
+                dbConnection.Close();
+            }
+
+            return _ret;
+        }
+
+        public int Ms_SqlQry(string Qry)
+        {
+            int _ret = 0;
+            string sConnStr = GetConnString();
+
+            SqlConnection dbConnection = new SqlConnection(sConnStr);
+            string _qry = Qry;
+
+
+            try
+            {
+                dbConnection.Open();
+                SqlCommand _qrycmd = new SqlCommand(_qry, dbConnection);
+                //_qrycmd.ExecuteNonQuery();
+
+                SqlDataReader Reader = _qrycmd.ExecuteReader();
+                _ret = Reader.RecordsAffected;
             }
             catch (Exception Ex)
             {
