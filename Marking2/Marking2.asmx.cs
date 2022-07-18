@@ -33,7 +33,7 @@ namespace Marking2
         public string GetMarkingCode(string LotNo, string SpecFile)
         {
             string[] serialCode1 = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
-            string[] serialCode2 = { "P", "Q", "R", "S", "A", "B", "C" };
+            string[] serialCode2 = { "P", "Q", "R", "S", "2", "3", "4", "5", "6", "7", "8", "9" };
             string ret = string.Empty;
 
             string sfPath = string.Format("{0}.dat",Path.Combine(_IMI_Path, SpecFile));
