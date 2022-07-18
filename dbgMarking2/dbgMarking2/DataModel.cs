@@ -76,7 +76,8 @@ namespace WindowsFormsApplication1
                         {
                             a01_IMI = Reader.GetString(0),
                             a02_MData1 = Reader.GetString(1),
-                            a03_MData2 = Reader.GetString(2)
+                            a03_MData2 = Reader.GetString(2),
+                            a04_LotNo = Reader.GetString(3)
                         });
                     }
                 }

@@ -246,7 +246,7 @@ namespace WindowsFormsApplication1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string t = GetMarkingCode2("EMDTEST038", "D059M300");
+            string t = GetMarkingCode2("EMDTEST039", "D059M301");
 
         }
 
@@ -290,7 +290,7 @@ namespace WindowsFormsApplication1
                     qry = string.Format("SELECT IMI_No, Mdata1, Mdata2, Lot_No " +
                                                 "FROM records " +
                                                 "WHERE IMI_No=\'{0}\' AND cast(datediff(dd,0,recdate) as datetime)=\'{1}\' and not mdata1 like '%@' " +
-                                                "ORDER BY MData1 DESC",
+                                                "ORDER BY recdate DESC",
                                                 SpecFile,
                                                 string.Format("{0:D4}-{1:D2}-{2:D2}", _today.Year, _today.Month, _today.Day));
 
@@ -315,35 +315,35 @@ namespace WindowsFormsApplication1
 
                         string lotException = "";
 
-                        while (((cnt % serialCode1.Length) - 1) != sc1no)
-                        {
-                            if (string.IsNullOrEmpty(lotException))
-                            {
-                                lotException += "\'" + mr[0].a04_LotNo + "\'";
-                            }
-                            else
-                            {
-                                lotException += ", \'" + mr[0].a04_LotNo + "\'";
-                            }
+                        //while (((cnt % serialCode1.Length) - 1) != sc1no)
+                        //{
+                        //    if (string.IsNullOrEmpty(lotException))
+                        //    {
+                        //        lotException += "\'" + mr[0].a04_LotNo + "\'";
+                        //    }
+                        //    else
+                        //    {
+                        //        lotException += ", \'" + mr[0].a04_LotNo + "\'";
+                        //    }
 
-                            string qryExcld = string.Format(qry,
-                                                SpecFile,
-                                                string.Format("{0:D4}-{1:D2}-{2:D2}", _today.Year, _today.Month, _today.Day),
-                                                lotException);
+                        //    string qryExcld = string.Format(qry,
+                        //                        SpecFile,
+                        //                        string.Format("{0:D4}-{1:D2}-{2:D2}", _today.Year, _today.Month, _today.Day),
+                        //                        lotException);
 
-                            if (mr.Count > 0) mr.Clear();
-                            cnt = dm.Ms_SqlQry(qryExcld, mr);
+                        //    if (mr.Count > 0) mr.Clear();
+                        //    cnt = dm.Ms_SqlQry(qryExcld, mr);
 
-                            if (cnt <= 0)
-                            {
-                                break;
-                            }
+                        //    if (cnt <= 0)
+                        //    {
+                        //        break;
+                        //    }
 
-                            serialCode = mr[0].a02_MData1.Substring(mr[0].a02_MData1.Length - SerialChar);
+                        //    serialCode = mr[0].a02_MData1.Substring(mr[0].a02_MData1.Length - SerialChar);
 
-                            sc1no = Array.IndexOf(serialCode1, serialCode.Substring(0, 1));
-                            sc2no = Array.IndexOf(serialCode2, serialCode.Substring(1, 1));
-                        }
+                        //    sc1no = Array.IndexOf(serialCode1, serialCode.Substring(0, 1));
+                        //    sc2no = Array.IndexOf(serialCode2, serialCode.Substring(1, 1));
+                        //}
 
                         if (cnt <= 0)
                         {
@@ -429,6 +429,7 @@ namespace WindowsFormsApplication1
                     int SerialChar = 2;
 
                     string serialCode = mr[0].a02_MData1.Substring(mr[0].a02_MData1.Length - SerialChar);
+                    string lastSerialCode = mr[mr.Count - 1].a02_MData1.Substring(mr[0].a02_MData1.Length - SerialChar);
 
                     int sc1no = Array.IndexOf(serialCode1, serialCode.Substring(0, 1));
                     int sc2no = Array.IndexOf(serialCode2, serialCode.Substring(1, 1));
@@ -441,35 +442,42 @@ namespace WindowsFormsApplication1
 
                     string lotException = "";
 
-                    //while (((cnt % serialCode1.Length) - 1) != sc1no)
-                    //{
-                    //    if (string.IsNullOrEmpty(lotException))
-                    //    {
-                    //        lotException += "\'" + mr[0].a04_LotNo + "\'";
-                    //    }
-                    //    else
-                    //    {
-                    //        lotException += ", \'" + mr[0].a04_LotNo + "\'";
-                    //    }
+                    while (lastSerialCode.ToUpper() != "1P")
+                    {
+                        if (string.IsNullOrEmpty(lotException))
+                        {
+                            lotException += "\'" + mr[mr.Count - 1].a04_LotNo + "\'";
+                        }
+                        else
+                        {
+                            lotException += ", \'" + mr[mr.Count - 1].a04_LotNo + "\'";
+                        }
 
-                    //    string qryExcld = string.Format(qry,
-                    //                        SpecFile,
-                    //                        string.Format("{0:D4}-{1:D2}-{2:D2}", _today.Year, _today.Month, _today.Day),
-                    //                        lotException);
+                        string qryExcld = string.Format(qry,
+                                            SpecFile,
+                                            string.Format("{0:D4}-{1:D2}-{2:D2}", _today.Year, _today.Month, _today.Day),
+                                            lotException);
 
-                    //    if (mr.Count > 0) mr.Clear();
-                    //    cnt = dm.Ms_SqlQry(qryExcld, mr);
+                        if (mr.Count > 0) mr.Clear();
+                        cnt = dm.Ms_SqlQry(qryExcld, mr);
 
-                    //    if (cnt <= 0)
-                    //    {
-                    //        break;
-                    //    }
+                        if (cnt <= 0)
+                        {
+                            break;
+                        }
 
-                    //    serialCode = mr[0].a02_MData1.Substring(mr[0].a02_MData1.Length - SerialChar);
+                        lastSerialCode = mr[mr.Count - 1].a02_MData1.Substring(mr[0].a02_MData1.Length - SerialChar);
 
-                    //    sc1no = Array.IndexOf(serialCode1, serialCode.Substring(0, 1));
-                    //    sc2no = Array.IndexOf(serialCode2, serialCode.Substring(1, 1));
-                    //}
+                        if (lastSerialCode.ToUpper() == "1P")
+                        {
+                            break;
+                        }
+
+                        serialCode = mr[0].a02_MData1.Substring(mr[0].a02_MData1.Length - SerialChar);
+
+                        sc1no = Array.IndexOf(serialCode1, serialCode.Substring(0, 1));
+                        sc2no = Array.IndexOf(serialCode2, serialCode.Substring(1, 1));
+                    }
 
                     if (cnt <= 0)
                     {
