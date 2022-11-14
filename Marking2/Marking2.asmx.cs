@@ -156,11 +156,11 @@ namespace Marking2
                                     {
                                         if (string.IsNullOrEmpty(lotException))
                                         {
-                                            lotException += "\'" + mr[0].a04_LotNo + "\'";
+                                            lotException += "\'" + mr[mr.Count - 1].a04_LotNo + "\'";
                                         }
                                         else
                                         {
-                                            lotException += ", \'" + mr[0].a04_LotNo + "\'";
+                                            lotException += ", \'" + mr[mr.Count - 1].a04_LotNo + "\'";
                                         }
 
                                         string qryExcld = string.Format(qry,
@@ -290,11 +290,11 @@ namespace Marking2
                                 {
                                     if (string.IsNullOrEmpty(lotException))
                                     {
-                                        lotException += "\'" + mr[0].a04_LotNo + "\'";
+                                        lotException += "\'" + mr[mr.Count - 1].a04_LotNo + "\'";
                                     }
                                     else
                                     {
-                                        lotException += ", \'" + mr[0].a04_LotNo + "\'";
+                                        lotException += ", \'" + mr[mr.Count - 1].a04_LotNo + "\'";
                                     }
 
                                     string qryExcld = string.Format(qry,
