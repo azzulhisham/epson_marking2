@@ -734,6 +734,8 @@ namespace WindowsFormsApplication1
                                     }
                                     else
                                     {
+
+
                                         int serialCodeNo = (sc2no * serialCode1.Length) + sc1no + 1;
                                         int serialCode1Idx = (serialCodeNo % serialCode1.Length);
                                         int serialCode2Idx = (int)(serialCodeNo / serialCode1.Length);
@@ -912,7 +914,7 @@ namespace WindowsFormsApplication1
                             else
                             {
                                 int serialCodeNo = 0;
-                                int fr = sf.a02_Plant.Count(n => n == '#');
+                                //int fr = sf.a02_Plant.Count(n => n == '#');
 
                                 int serialCode1Idx = (serialCodeNo % serialCode1.Length);
                                 int serialCode2Idx = (int)(serialCodeNo / serialCode1.Length);
@@ -927,7 +929,7 @@ namespace WindowsFormsApplication1
                                     serialCode2Idx = 0;
                                 }
 
-                                ret = sf.a01_Freq.Substring(0, fr) +
+                                ret = 
                                         serialCode1[serialCode1Idx] +
                                         serialCode2[serialCode2Idx];
                             }
