@@ -247,7 +247,7 @@ namespace WindowsFormsApplication1
         private void button4_Click(object sender, EventArgs e)
         {
             //string t = GetMarkingCode2("EMER999956", "D059M300");
-            string t = GetMarkingCodeX("EMER999956", "D059M300");
+            string t = GetMarkingCodeX("EMER9999XX", "D059M300");
 
         }
 
@@ -558,6 +558,7 @@ namespace WindowsFormsApplication1
             string[] serialCode2 = { "P", "Q", "R", "S", "2", "3", "4", "5", "6", "7", "8", "9" };
             string ret = string.Empty;
 
+            string firstSeq = serialCode1[0] + serialCode2[0];
             string sfPath = string.Format("{0}.dat", Path.Combine(_IMI_Path, SpecFile));
 
 
@@ -674,7 +675,7 @@ namespace WindowsFormsApplication1
 
                                     string lotException = "";
 
-                                    while (lastSerialCode.ToUpper() != "1P")
+                                    while (lastSerialCode.ToUpper() != firstSeq)
                                     {
                                         if (string.IsNullOrEmpty(lotException))
                                         {
@@ -700,7 +701,7 @@ namespace WindowsFormsApplication1
 
                                         lastSerialCode = mr[mr.Count - 1].a02_MData1.Substring(mr[0].a02_MData1.Length - SerialChar);
 
-                                        if (lastSerialCode.ToUpper() == "1P")
+                                        if (lastSerialCode.ToUpper() == firstSeq)
                                         {
                                             break;
                                         }
@@ -808,7 +809,8 @@ namespace WindowsFormsApplication1
 
                                 string lotException = "";
 
-                                while (lastSerialCode.ToUpper() != "1P")
+                                //to confirm every new day must start with the first sequence
+                                while (lastSerialCode.ToUpper() != firstSeq)
                                 {
                                     if (string.IsNullOrEmpty(lotException))
                                     {
@@ -834,7 +836,7 @@ namespace WindowsFormsApplication1
 
                                     lastSerialCode = mr[mr.Count - 1].a02_MData1.Substring(mr[0].a02_MData1.Length - SerialChar);
 
-                                    if (lastSerialCode.ToUpper() == "1P")
+                                    if (lastSerialCode.ToUpper() == firstSeq)
                                     {
                                         break;
                                     }
@@ -868,6 +870,26 @@ namespace WindowsFormsApplication1
                                 }
                                 else
                                 {
+                                    //once confirm started with first sequence then reconfirm every sequence
+                                    //it going to ignore jumping sequence
+                                    int seqCnt = 0;
+                                    for (int i = mr.Count - 1; i >= 0; i--)
+                                    {
+                                        int serialCode1IdxTmp = (seqCnt % serialCode1.Length);
+                                        int serialCode2IdxTmp = (int)(seqCnt / serialCode1.Length);
+
+                                        string dataSerialCode = mr[i].a02_MData1.Substring(mr[i].a02_MData1.Length - SerialChar);
+                                        string expectedSerialCode = serialCode1[serialCode1IdxTmp] + serialCode2[serialCode2IdxTmp];
+
+                                        if (dataSerialCode == expectedSerialCode)
+                                        {
+                                            sc1no = Array.IndexOf(serialCode1, dataSerialCode.Substring(0, 1));
+                                            sc2no = Array.IndexOf(serialCode2, dataSerialCode.Substring(1, 1));
+                                            seqCnt += 1;
+                                        }
+                                    }
+
+
                                     int serialCodeNo = (sc2no * serialCode1.Length) + sc1no + 1;
                                     int serialCode1Idx = (serialCodeNo % serialCode1.Length);
                                     int serialCode2Idx = (int)(serialCodeNo / serialCode1.Length);
@@ -882,7 +904,7 @@ namespace WindowsFormsApplication1
                                         serialCode2Idx = 0;
                                     }
 
-                                    ret = sf.a01_Freq.Substring(0, fr) +
+                                    ret = 
                                             serialCode1[serialCode1Idx] +
                                             serialCode2[serialCode2Idx];
                                 }
