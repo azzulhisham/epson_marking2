@@ -246,7 +246,12 @@ namespace WindowsFormsApplication1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string t = GetMarkingCodeX("EMER9999XX", "D059M300");
+            service ss = new service();
+            string result = ss.GetMarkingCode(this.textBox1.Text.Trim(), "D059M300");
+
+            this.label1.Text = result;
+
+            //string t = GetMarkingCodeX("EMER9999XX", "D059M300");
 
             //for (int i = 4; i <= 20; i++)
             //{
