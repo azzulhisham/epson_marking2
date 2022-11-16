@@ -34,7 +34,7 @@ namespace Marking2
         {
             string[] serialCode1 = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
             string[] serialCode2 = { "P", "Q", "R", "S", "2", "3", "4", "5", "6", "7", "8", "9" };
-            string ret = string.Empty;
+            string ret = "-----";
 
             string firstSeq = serialCode1[0] + serialCode2[0];
             string sfPath = string.Format("{0}.dat",Path.Combine(_IMI_Path, SpecFile));
@@ -97,7 +97,7 @@ namespace Marking2
                     {
                         DateTime _today = DateTime.Today;
                         string qry = string.Format("SELECT IMI_No, Mdata1, Mdata2, Lot_No " +
-                                                    "FROM records " +
+                                                    "FROM SequenceRec " +
                                                     "WHERE Lot_No=\'{0}\' " +
                                                     "ORDER BY MData1 DESC",
                                                     LotNo
@@ -114,9 +114,9 @@ namespace Marking2
 
                             if (match.Length > 0)
                             {
-                                ret = "-";
+                                ret = "-----";
                                 qry = string.Format("DELETE " +
-                                                    "FROM records " +
+                                                    "FROM SequenceRec " +
                                                     "WHERE IMI_No=\'{0}\' AND Mdata1 like \'%{1}\'",
                                                     SpecFile, match.Value
                                                     );
@@ -125,7 +125,7 @@ namespace Marking2
 
 
                                 qry = string.Format("SELECT IMI_No, Mdata1, Mdata2, Lot_No " +
-                                                            "FROM records " +
+                                                            "FROM SequenceRec " +
                                                             "WHERE IMI_No=\'{0}\' AND cast(datediff(dd,0,recdate) as datetime)=\'{1}\' and not mdata1 like '%@' " +
                                                             "ORDER BY recdate DESC",
                                                             SpecFile,
@@ -147,7 +147,7 @@ namespace Marking2
 
                                     //added by Zulhisham Tan on 30/05/2021 - To ensure the number of lot is equal to the sequence number, remove lot at cut-off time
                                     qry = "SELECT IMI_No, Mdata1, Mdata2, Lot_No " +
-                                                            "FROM records " +
+                                                            "FROM SequenceRec " +
                                                             "WHERE IMI_No=\'{0}\' AND cast(datediff(dd,0,recdate) as datetime)=\'{1}\' and not mdata1 like '%@' and not Lot_No in ({2}) " +
                                                             "ORDER BY recdate DESC";
 
@@ -215,6 +215,8 @@ namespace Marking2
                                         //once confirm started with first sequence then reconfirm every sequence
                                         //it going to ignore jumping sequence
                                         int seqCnt = 0;
+                                        int seqFail = 0;
+
                                         for (int i = mr.Count - 1; i >= 0; i--)
                                         {
                                             int serialCode1IdxTmp = (seqCnt % serialCode1.Length);
@@ -227,7 +229,31 @@ namespace Marking2
                                             {
                                                 sc1no = Array.IndexOf(serialCode1, dataSerialCode.Substring(0, 1));
                                                 sc2no = Array.IndexOf(serialCode2, dataSerialCode.Substring(1, 1));
+
                                                 seqCnt += 1;
+                                            }
+                                            else
+                                            {
+                                                //allow jump 1 sequence : 1P, 2P, 3P, 5P, 4P, 6P
+                                                //otherwise return fail
+                                                int _sc1no = Array.IndexOf(serialCode1, dataSerialCode.Substring(0, 1));
+                                                int _sc2no = Array.IndexOf(serialCode2, dataSerialCode.Substring(1, 1));
+
+                                                int _seqCnt = _sc2no * serialCode1.Length + _sc1no;
+                                                seqFail += seqCnt - _seqCnt;
+
+                                                if (seqFail <= 1 && seqFail >= -1)
+                                                {
+                                                    sc1no = Array.IndexOf(serialCode1, expectedSerialCode.Substring(0, 1));
+                                                    sc2no = Array.IndexOf(serialCode2, expectedSerialCode.Substring(1, 1));
+
+                                                    seqCnt += 1;
+                                                }
+                                                else
+                                                {
+                                                    seqFail = 0;
+                                                }
+
                                             }
                                         }
 
@@ -249,6 +275,10 @@ namespace Marking2
                                                 serialCode1[serialCode1Idx] +
                                                 serialCode2[serialCode2Idx];
 
+                                        if (seqFail != 0)
+                                        {
+                                            ret = "-----";
+                                        }
                                     }
                                 }
                                 else
@@ -278,7 +308,7 @@ namespace Marking2
                         else
                         {
                             qry = string.Format("SELECT IMI_No, Mdata1, Mdata2, Lot_No " +
-                                                        "FROM records " +
+                                                        "FROM SequenceRec " +
                                                         "WHERE IMI_No=\'{0}\' AND cast(datediff(dd,0,recdate) as datetime)=\'{1}\' and not mdata1 like '%@' " +
                                                         "ORDER BY recdate DESC", 
                                                         SpecFile,
@@ -300,7 +330,7 @@ namespace Marking2
 
                                 //added by Zulhisham Tan on 30/05/2021 - To ensure the number of lot is equal to the sequence number, remove lot at cut-off time
                                 qry = "SELECT IMI_No, Mdata1, Mdata2, Lot_No " +
-                                                        "FROM records " +
+                                                        "FROM SequenceRec " +
                                                         "WHERE IMI_No=\'{0}\' AND cast(datediff(dd,0,recdate) as datetime)=\'{1}\' and not mdata1 like '%@' and not Lot_No in ({2}) " +
                                                         "ORDER BY recdate DESC";
 
@@ -369,6 +399,8 @@ namespace Marking2
                                     //once confirm started with first sequence then reconfirm every sequence
                                     //it going to ignore jumping sequence
                                     int seqCnt = 0;
+                                    int seqFail = 0;
+
                                     for (int i = mr.Count - 1; i >= 0; i--)
                                     {
                                         int serialCode1IdxTmp = (seqCnt % serialCode1.Length);
@@ -381,7 +413,31 @@ namespace Marking2
                                         {
                                             sc1no = Array.IndexOf(serialCode1, dataSerialCode.Substring(0, 1));
                                             sc2no = Array.IndexOf(serialCode2, dataSerialCode.Substring(1, 1));
+
                                             seqCnt += 1;
+                                        }
+                                        else
+                                        {
+                                            //allow jump 1 sequence : 1P, 2P, 3P, 5P, 4P, 6P
+                                            //otherwise return fail
+                                            int _sc1no = Array.IndexOf(serialCode1, dataSerialCode.Substring(0, 1));
+                                            int _sc2no = Array.IndexOf(serialCode2, dataSerialCode.Substring(1, 1));
+
+                                            int _seqCnt = _sc2no * serialCode1.Length + _sc1no;
+                                            seqFail += seqCnt - _seqCnt;
+
+                                            if (seqFail <= 1 && seqFail >= -1)
+                                            {
+                                                sc1no = Array.IndexOf(serialCode1, expectedSerialCode.Substring(0, 1));
+                                                sc2no = Array.IndexOf(serialCode2, expectedSerialCode.Substring(1, 1));
+
+                                                seqCnt += 1;
+                                            }
+                                            else
+                                            {
+                                                seqFail = 0;
+                                            }
+
                                         }
                                     }
 
@@ -402,6 +458,11 @@ namespace Marking2
                                     ret = sf.a01_Freq.Substring(0, fr) +
                                             serialCode1[serialCode1Idx] +
                                             serialCode2[serialCode2Idx];
+
+                                    if (seqFail != 0)
+                                    {
+                                        ret = "-----";
+                                    }
                                 }
                             }
                             else
@@ -428,6 +489,15 @@ namespace Marking2
                             }
                         }
                     }
+                }
+
+                if (!string.IsNullOrEmpty(ret) && ret != "-----")
+                {
+                    string qry = "IF NOT EXISTS (SELECT * FROM SequenceRec WHERE Lot_No='{0}') " +
+                                    "INSERT INTO SequenceRec VALUES ('{0}', '{1}', GETDATE(), '{2}', '-', '-', '-')";
+
+                    qry = string.Format(qry, LotNo, SpecFile, ret);
+                    dm.Ms_SqlQry(qry);
                 }
             }
 
