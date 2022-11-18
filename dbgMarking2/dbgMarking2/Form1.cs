@@ -256,7 +256,7 @@ namespace WindowsFormsApplication1
             DateTime _today = DateTime.Now;
 
             service ss = new service();
-            string result = ss.GetMarkingCode(this.textBox1.Text.Trim(), "D059M300",
+            string result = ss.GetMarkingSequenceFC(this.textBox1.Text.Trim(), "P13A0001",
                 string.Format("{0:D4}-{1:D2}-{2:D2} {3:D2}:{4:D2}:{5:D2}", _today.Year, _today.Month, _today.Day, _today.Hour, _today.Minute, _today.Second));
 
             this.label1.Text = result;
