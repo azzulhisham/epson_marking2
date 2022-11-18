@@ -28,6 +28,9 @@ namespace WindowsFormsApplication1
         public string a03_MData2 { get; set; }
         public string a04_LotNo { get; set; }
 
+        public DateTime a05_RecDate { get; set; }
+        public string a06_Remark { get; set; }
+        public string a07_Note { get; set; }
     }
 
     public class DataModel
@@ -49,7 +52,7 @@ namespace WindowsFormsApplication1
             return sConnStr;
         }
 
-        public int Ms_SqlQry(string Qry, List<MarkingRec> rec)
+        public int Ms_SqlQry(string Qry, List<MarkingRec> rec, bool extendQuery = false)
         {
             int _ret = 0;
             string sConnStr = GetConnString();
@@ -77,7 +80,9 @@ namespace WindowsFormsApplication1
                             a01_IMI = Reader.GetString(0),
                             a02_MData1 = Reader.GetString(1),
                             a03_MData2 = Reader.GetString(2),
-                            a04_LotNo = Reader.GetString(3)
+                            a04_LotNo = Reader.GetString(3),
+                            a05_RecDate = extendQuery ? Reader.GetDateTime(4) : DateTime.Now,
+                            a06_Remark = extendQuery ? Reader.GetString(5) : string.Empty
                         });
                     }
                 }

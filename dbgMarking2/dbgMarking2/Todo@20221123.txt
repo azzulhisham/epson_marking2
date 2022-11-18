@@ -1,0 +1,21 @@
+﻿//create new table in Marking Database
+CREATE TABLE [dbo].[SequenceRec](
+	[Lot_No] [nvarchar](50) NOT NULL,
+	[IMI_No] [nvarchar](50) NOT NULL,
+	[RecDate] [datetime] NOT NULL,
+	[MData1] [nvarchar](50) NOT NULL,
+	[MData2] [nvarchar](50) NOT NULL,
+	[Remark] [nvarchar](50) NOT NULL,
+	[Note] [nvarchar](50) NOT NULL
+) ON [PRIMARY]
+
+//Backup the day data to new table
+  insert into SequenceRec 
+	select Lot_No as Lot_No, IMI_No as IMI_No, RecDate as RecDate, MData1 as MData1, MData2 as MData2, '-' as Remark, '-' as Note
+	from Records
+	where cast(datediff(dd,0,recdate) as datetime)='2022-11-16'
+
+//Update and test Marking2
+//Update and test LmServices
+
+//Continue with FC new code

@@ -21,7 +21,8 @@ namespace Marking2
     // [System.Web.Script.Services.ScriptService]
     public class MarkingCode : System.Web.Services.WebService
     {
-        public const string _IMI_Path = @"D:\MachineNet\MacDB\Marking\ALineIMI";
+        //public const string _IMI_Path = @"D:\MachineNet\MacDB\Marking\ALineIMI";
+        public const string _IMI_Path = @"C:\tmp\Test";
 
         [WebMethod(EnableSession = true)]
         public string AboutMe()
@@ -30,7 +31,7 @@ namespace Marking2
         }
 
         [WebMethod(EnableSession=true)]
-        public string GetMarkingCode(string LotNo, string SpecFile)
+        public string GetMarkingCode(string LotNo, string SpecFile, string MarkingDate)
         {
             string[] serialCode1 = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
             string[] serialCode2 = { "P", "Q", "R", "S", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -45,6 +46,14 @@ namespace Marking2
                 SpecFile sf = new SpecFile();
                 DataModel dm = new DataModel();
                 List<MarkingRec> mr = new List<MarkingRec>();
+
+                //MarkingDate = '2022-11-18 16:00:00'
+                DateTime _today = new DateTime(Convert.ToInt32(MarkingDate.Substring(0, 4)),
+                                               Convert.ToInt32(MarkingDate.Substring(5, 2)),
+                                               Convert.ToInt32(MarkingDate.Substring(8, 2)),
+                                               Convert.ToInt32(MarkingDate.Substring(11, 2)),
+                                               Convert.ToInt32(MarkingDate.Substring(14, 2)),
+                                               Convert.ToInt32(MarkingDate.Substring(17, 2)));
 
                 string[] fc = File.ReadAllLines(sfPath);
 
@@ -95,15 +104,30 @@ namespace Marking2
 
                     if (sf.a02_Plant.EndsWith("@@"))
                     {
-                        DateTime _today = DateTime.Today;
-                        string qry = string.Format("SELECT IMI_No, Mdata1, Mdata2, Lot_No " +
+                        string qry = string.Format("SELECT IMI_No, Mdata1, Mdata2, Lot_No, RecDate, Remark " +
                                                     "FROM SequenceRec " +
                                                     "WHERE Lot_No=\'{0}\' " +
-                                                    "ORDER BY MData1 DESC",
+                                                    "ORDER BY RecDate DESC",
                                                     LotNo
                                                     );
 
-                        int cnt = dm.Ms_SqlQry(qry, mr);
+                        int cnt = dm.Ms_SqlQry(qry, mr, true);
+
+                        if (cnt > 0 && mr.FirstOrDefault().a06_Remark != "1")
+                        {
+                            if (mr.FirstOrDefault().a05_RecDate.Date != _today.Date)
+                            {
+                                //get new marking sequence
+                                cnt = 0;
+                            }
+                        }
+                        else
+                        {
+                            if (cnt > 0)
+                            {
+                                _today = mr.FirstOrDefault().a05_RecDate;
+                            }
+                        }
 
                         if (cnt > 0)
                         {
@@ -493,15 +517,31 @@ namespace Marking2
 
                 if (!string.IsNullOrEmpty(ret) && ret != "-----")
                 {
-                    string qry = "IF NOT EXISTS (SELECT * FROM SequenceRec WHERE Lot_No='{0}') " +
-                                    "INSERT INTO SequenceRec VALUES ('{0}', '{1}', GETDATE(), '{2}', '-', '-', '-')";
+                    string qry = "IF NOT EXISTS (SELECT * FROM SequenceRec WHERE Lot_No='{0}' AND cast(datediff(dd,0,RecDate) as datetime)='{3}') " +
+                                    "INSERT INTO SequenceRec VALUES ('{0}', '{1}', '{4}', '{2}', '-', '0', '-')";
 
-                    qry = string.Format(qry, LotNo, SpecFile, ret);
+                    qry = string.Format(qry, LotNo, SpecFile, ret,
+                        string.Format("{0:D4}-{1:D2}-{2:D2}", _today.Year, _today.Month, _today.Day),
+                        string.Format("{0:D4}-{1:D2}-{2:D2} {3:D2}:{4:D2}:{5:D2}", _today.Year, _today.Month, _today.Day, _today.Hour, _today.Minute, _today.Second));
                     dm.Ms_SqlQry(qry);
                 }
             }
 
             return ret;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string SetSequenceMarked(string LotNo, string SpecFile, string MarkingCode1)
+        {
+            DataModel dm = new DataModel();
+
+            string qry = "IF EXISTS (SELECT * FROM SequenceRec WHERE Lot_No='{0}' AND MData1='{1}') " +
+                "UPDATE SequenceRec SET Remark='1'  WHERE Lot_No='{0}' AND MData1='{1}'";
+
+            qry = string.Format(qry, LotNo, MarkingCode1);
+            int result = dm.Ms_SqlQry(qry);
+
+            return result.ToString();
         }
 
     }

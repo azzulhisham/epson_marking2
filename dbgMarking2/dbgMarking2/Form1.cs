@@ -238,16 +238,26 @@ namespace WindowsFormsApplication1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string ret = "163@@";
+            //string ret = "163@@";
 
-            Regex regex = new Regex("[^a-zA-Z0-9_.!]");
-            Match match = regex.Match(ret);
+            //Regex regex = new Regex("[^a-zA-Z0-9_.!]");
+            //Match match = regex.Match(ret);
+
+            service ss = new service();
+
+            if (this.label1.Text.Length > 3)
+            {
+                this.label1.Text = ss.SetSequenceMarked(this.textBox1.Text.Trim(), "D059M300", this.label1.Text);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            DateTime _today = DateTime.Now;
+
             service ss = new service();
-            string result = ss.GetMarkingCode(this.textBox1.Text.Trim(), "D059M300");
+            string result = ss.GetMarkingCode(this.textBox1.Text.Trim(), "D059M300",
+                string.Format("{0:D4}-{1:D2}-{2:D2} {3:D2}:{4:D2}:{5:D2}", _today.Year, _today.Month, _today.Day, _today.Hour, _today.Minute, _today.Second));
 
             this.label1.Text = result;
 
