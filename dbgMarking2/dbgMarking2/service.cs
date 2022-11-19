@@ -595,6 +595,10 @@ namespace WindowsFormsApplication1
 
                     if (sf.a03_ProdCode.Contains("@@@"))
                     {
+                        int seqLen = sf.a03_ProdCode.Count(n => n == '@');
+                        char padChar = '0';
+                        firstSeq = (1).ToString().PadLeft(seqLen, padChar);
+
                         string qry = string.Format("SELECT IMI_No, Mdata1, Mdata2, Lot_No, RecDate, Remark " +
                                                     "FROM SequenceRec " +
                                                     "WHERE Lot_No=\'{0}\' " +

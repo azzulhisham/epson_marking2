@@ -548,7 +548,7 @@ namespace Marking2
         public string GetMarkingSequenceFC(string LotNo, string SpecFile, string MarkingDate)
         {
             string ret = "-----";
-            string firstSeq = "001";
+            string firstSeq = "";
             string sfPath = string.Format("{0}.dat", Path.Combine(_IMI_Path, SpecFile));
 
 
@@ -613,8 +613,13 @@ namespace Marking2
                         }
                     }
 
-                    if (sf.a03_ProdCode.Contains("@@@"))
+                    //@@@ == sequence marking definition for FC
+                    if (sf.a03_ProdCode.StartsWith("@") && sf.a03_ProdCode.EndsWith("@") && sf.a03_ProdCode.Length >= 3)
                     {
+                        int seqLen = sf.a03_ProdCode.Count(n => n == '@');
+                        char padChar = '0';
+                        firstSeq = (1).ToString().PadLeft(seqLen, padChar);
+
                         string qry = string.Format("SELECT IMI_No, Mdata1, Mdata2, Lot_No, RecDate, Remark " +
                                                     "FROM SequenceRec " +
                                                     "WHERE Lot_No=\'{0}\' " +
@@ -732,7 +737,7 @@ namespace Marking2
                                         for (int i = mr.Count - 1; i >= 0; i--)
                                         {
                                             string dataSerialCode = mr[i].a02_MData1.Substring(mr[i].a02_MData1.Length - SerialChar);
-                                            string expectedSerialCode = seqCnt.ToString().PadLeft(3, '0');
+                                            string expectedSerialCode = seqCnt.ToString().PadLeft(seqLen, padChar);
 
                                             if (dataSerialCode == expectedSerialCode)
                                             {
@@ -757,7 +762,7 @@ namespace Marking2
                                             }
                                         }
 
-                                        ret = seqCnt.ToString().PadLeft(3, '0');
+                                        ret = seqCnt.ToString().PadLeft(seqLen, padChar);
 
                                         if (seqFail != 0)
                                         {
@@ -844,7 +849,7 @@ namespace Marking2
                                     for (int i = mr.Count - 1; i >= 0; i--)
                                     {
                                         string dataSerialCode = mr[i].a02_MData1.Substring(0, mr[i].a02_MData1.Length - sf.a02_Plant.Length);
-                                        string expectedSerialCode = seqCnt.ToString().PadLeft(3, '0');
+                                        string expectedSerialCode = seqCnt.ToString().PadLeft(seqLen, padChar);
 
                                         if (dataSerialCode == expectedSerialCode)
                                         {
@@ -870,7 +875,7 @@ namespace Marking2
                                         }
                                     }
 
-                                    ret = seqCnt.ToString().PadLeft(3, '0');
+                                    ret = seqCnt.ToString().PadLeft(seqLen, padChar);
 
                                     if (seqFail != 0)
                                     {
@@ -886,10 +891,11 @@ namespace Marking2
                     }
                 }
 
-                ret += sf.a02_Plant;
 
                 if (!string.IsNullOrEmpty(ret) && ret != "-----")
                 {
+                    ret += sf.a02_Plant;
+
                     string qry = "IF NOT EXISTS (SELECT * FROM SequenceRec WHERE Lot_No='{0}' AND cast(datediff(dd,0,RecDate) as datetime)='{3}') " +
                                     "INSERT INTO SequenceRec VALUES ('{0}', '{1}', '{4}', '{2}', '-', '0', '-')";
 
@@ -902,6 +908,5 @@ namespace Marking2
 
             return ret;
         }
-
     }
 }
