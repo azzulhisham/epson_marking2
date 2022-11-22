@@ -22,3 +22,82 @@ CREATE TABLE [dbo].[SequenceRec](
 
 //Continue with FC new code
 
+
+
+
+
+
+//Double check this script to minimal modification volume
+use Marking
+
+IF NOT EXISTS ( 
+	SELECT * FROM RecordSerNo 
+	WHERE lot_no='TESTFC0022' AND IMI_No='P13A0001' AND RecDate>='2022-11-20' AND RecDate<'2022-11-21') 
+
+	BEGIN 
+	DECLARE @SerNo Int; 
+
+	IF NOT EXISTS (
+		SELECT * FROM Records 
+		WHERE lot_no='TESTFC0022') 
+
+		BEGIN 
+		SELECT @SerNo=(ISNULL(MAX(SerNo), 0) + 1) FROM RecordSerNo 
+		WHERE IMI_No='P13A0001' AND RecDate>='2022-11-20' AND RecDate<'2022-11-21' 
+		GROUP BY IMI_No 
+		INSERT INTO RecordSerNo VALUES ('TESTFC0022', 'P13A0001', GETDATE(), ISNULL(@SerNo, 1)) 
+		SELECT ISNULL(@SerNo, 1) 
+		END 
+	ELSE
+		BEGIN 
+		SELECT ISNULL(@SerNo, 0) 
+		END 
+	END 
+ELSE 
+	BEGIN 
+	SELECT TOP 1 @SerNo=SerNo FROM RecordSerNo 
+	WHERE lot_no='TESTFC0022' AND IMI_No='P13A0001' AND RecDate>='2022-11-20' AND RecDate<'2022-11-21' ORDER BY RecDate DESC 
+	SELECT ISNULL(@SerNo, 1) 
+	END
+	
+
+-- NW Lot No >> New Day Get New Serial number
+IF NOT EXISTS ( 
+	SELECT * FROM RecordSerNo 
+	WHERE lot_no='TESTFC0024' AND IMI_No='P13A0001' AND RecDate>='2022-11-20' AND RecDate<'2022-11-21') 
+	
+	BEGIN 
+	DECLARE @SerNo Int; 
+	SELECT @SerNo=(ISNULL(MAX(SerNo), 0) + 1) FROM RecordSerNo 
+	WHERE IMI_No='P13A0001' AND RecDate>='2022-11-20' AND RecDate<'2022-11-21' 
+	GROUP BY IMI_No 
+	INSERT INTO RecordSerNo VALUES ('TESTFC0024', 'P13A0001', GETDATE(), ISNULL(@SerNo, 1)) 
+	SELECT ISNULL(@SerNo, 1) 
+	END 
+ELSE 
+	BEGIN 
+	SELECT TOP 1 @SerNo=ISNULL(SerNo, 1) FROM RecordSerNo 
+	WHERE lot_no='TESTFC0024' AND IMI_No='P13A0001' AND RecDate>='2022-11-20' AND RecDate<'2022-11-21' ORDER BY RecDate DESC 
+	SELECT ISNULL(@SerNo, 1) 
+	END 
+
+
+--EX Lot No >> No matter what, get back old record even new day
+IF NOT EXISTS ( 
+	SELECT * FROM RecordSerNo 
+	WHERE lot_no='TESTFC0020') 
+
+	BEGIN 
+	DECLARE @SerNo Int; 
+	SELECT @SerNo=(ISNULL(MAX(SerNo), 0) + 1) FROM RecordSerNo 
+	WHERE IMI_No='P13A0001' AND RecDate>='2022-11-20' AND RecDate<'2022-11-21' 
+	GROUP BY IMI_No 
+	INSERT INTO RecordSerNo VALUES ('TESTFC0020', 'P13A0001', GETDATE(), ISNULL(@SerNo, 1)) 
+	SELECT ISNULL(@SerNo, 1) 
+	END 
+ELSE 
+	BEGIN 
+	SELECT TOP 1 @SerNo=ISNULL(SerNo, 0) FROM RecordSerNo 
+	WHERE lot_no='TESTFC0020' AND IMI_No='P13A0001' ORDER BY RecDate DESC 
+	SELECT ISNULL(@SerNo, 0) 
+END 
