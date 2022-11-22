@@ -545,7 +545,7 @@ namespace Marking2
         }
 
         [WebMethod(EnableSession = true)]
-        public string GetMarkingSequenceFC(string format, string seqNo)
+        public string GetMarkingSequenceFC(string format, string seqNo, string option1, string option2)
         {
             string[] serialCode1 = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
             string[] serialCode2 = { "P", "Q", "R", "S", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -555,13 +555,57 @@ namespace Marking2
 
             int maxSeq = serialCode1.Length * serialCode2.Length;
 
+            if (!string.IsNullOrEmpty(option1) && !string.IsNullOrEmpty(option2))
+            {
+                maxSeq = option1.Length * option2.Length;
+            }
+
+            if (!string.IsNullOrEmpty(option1) && string.IsNullOrEmpty(option2))
+            {
+                maxSeq = option1.Length;
+            }
+
+            if (string.IsNullOrEmpty(option1) && !string.IsNullOrEmpty(option2))
+            {
+                maxSeq = option2.Length;
+            }
+
             if (convertSequenceNum && seqNumber > 0 && seqNumber <= maxSeq)
             {
                 seqNumber -= 1;
-                int serialCode1Idx = (seqNumber % serialCode1.Length);
-                int serialCode2Idx = (int)(seqNumber / serialCode1.Length);
 
-                return string.Format(format, serialCode1[serialCode1Idx], serialCode2[serialCode2Idx]);
+                try
+                {
+                    if (string.IsNullOrEmpty(option1) && string.IsNullOrEmpty(option2))
+                    {
+                        int serialCode1Idx = (seqNumber % serialCode1.Length);
+                        int serialCode2Idx = (int)(seqNumber / serialCode1.Length);
+
+                        return string.Format(format, serialCode1[serialCode1Idx], serialCode2[serialCode2Idx]);
+                    }
+                    else if (!string.IsNullOrEmpty(option1) && !string.IsNullOrEmpty(option2))
+                    {
+                        int serialCode1Idx = (seqNumber % option1.Length);
+                        int serialCode2Idx = (int)(seqNumber / option2.Length);
+
+                        return string.Format(format, option1.Substring(serialCode1Idx, 1), option2.Substring(serialCode2Idx, 1));
+                    }
+                    else if (!string.IsNullOrEmpty(option1) && string.IsNullOrEmpty(option2))
+                    {
+                        return string.Format(format, option1.Substring(seqNumber, 1));
+                    }
+                    else if (string.IsNullOrEmpty(option1) && !string.IsNullOrEmpty(option2))
+                    {
+                        return string.Format(format, option2.Substring(seqNumber, 1));
+                    }
+
+                    return "!!!";
+
+                }
+                catch (Exception ex)
+                {
+                    return "!!!";
+                }
             }
             else
             {

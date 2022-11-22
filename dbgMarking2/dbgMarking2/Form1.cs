@@ -261,7 +261,7 @@ namespace WindowsFormsApplication1
 
 
 
-            string result = ss.GetMarkingSequenceFC(this.textBox2.Text.Trim(), this.textBox1.Text.Trim());
+            string result = ss.GetMarkingSequenceFC(this.textBox2.Text.Trim(), this.textBox1.Text.Trim(), "", "123");
             this.label1.Text = result.PadLeft(3, '0');
 
 
