@@ -36,17 +36,17 @@ namespace Marking2
     {
         static string GetConnString()
         {
-            //string sConnStr =
-            //        "Server=" + @"172.16.59.254\SQLEXPRESS" + "; " +
-            //        "DataBase=" + "Marking" + "; " +
-            //        "user id=" + "vb-sql" + ";" +
-            //        "password=" + "Anyn0m0us";
-
             string sConnStr =
-            "Server=" + @"DESKTOP-TLVFD7V\SQLEXPRESS" + "; " +
-            "DataBase=" + "Marking" + "; " +
-            "user id=" + "sa" + ";" +
-            "password=" + "Az@HoePinc0615";
+                    "Server=" + @"172.16.59.254\SQLEXPRESS" + "; " +
+                    "DataBase=" + "Marking" + "; " +
+                    "user id=" + "vb-sql" + ";" +
+                    "password=" + "Anyn0m0us";
+
+            //string sConnStr =
+            //"Server=" + @"DESKTOP-TLVFD7V\SQLEXPRESS" + "; " +
+            //"DataBase=" + "Marking" + "; " +
+            //"user id=" + "sa" + ";" +
+            //"password=" + "Az@HoePinc0615";
 
             return sConnStr;
         }

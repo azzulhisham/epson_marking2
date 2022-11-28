@@ -261,15 +261,16 @@ namespace WindowsFormsApplication1
 
 
 
-            string result = ss.GetMarkingSequenceFC(this.textBox2.Text.Trim(), this.textBox1.Text.Trim(), "", "123");
-            this.label1.Text = result.PadLeft(3, '0');
+            //string result = ss.GetMarkingSequenceFC(this.textBox2.Text.Trim(), this.textBox1.Text.Trim(), "", "123");
+            //this.label1.Text = result.PadLeft(3, '0');
 
 
 
 
-            //string t = GetMarkingCodeX("EMER9999XX", "D059M300");
+            string t = ss.GetMarkingCode("EMER999911", "D059M300",
+                string.Format("{0:D4}-{1:D2}-{2:D2} {3:D2}:{4:D2}:{5:D2}", _today.Year, _today.Month, _today.Day, _today.Hour, _today.Minute, _today.Second));
 
-            //for (int i = 4; i <= 20; i++)
+            //for (int i = 4; i <= 10; i++)
             //{
             //    string num = i.ToString().PadLeft(2, '0');
             //    string t = GetMarkingCodeX("EMER9999" + num, "D059M300");

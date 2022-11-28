@@ -21,8 +21,8 @@ namespace Marking2
     // [System.Web.Script.Services.ScriptService]
     public class MarkingCode : System.Web.Services.WebService
     {
-        //public const string _IMI_Path = @"D:\MachineNet\MacDB\Marking\ALineIMI";
-        public const string _IMI_Path = @"C:\tmp\Test";
+        public const string _IMI_Path = @"D:\MachineNet\MacDB\Marking\ALineIMI";
+        //public const string _IMI_Path = @"C:\tmp\Test";   //local debugging
 
         [WebMethod(EnableSession = true)]
         public string AboutMe()
