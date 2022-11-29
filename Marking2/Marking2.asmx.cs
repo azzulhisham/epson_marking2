@@ -35,7 +35,7 @@ namespace Marking2
         {
             string[] serialCode1 = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
             string[] serialCode2 = { "P", "Q", "R", "S", "2", "3", "4", "5", "6", "7", "8", "9" };
-            string ret = "-----";
+            string ret = "";
 
             string firstSeq = serialCode1[0] + serialCode2[0];
             string sfPath = string.Format("{0}.dat",Path.Combine(_IMI_Path, SpecFile));
@@ -541,7 +541,7 @@ namespace Marking2
             qry = string.Format(qry, LotNo, MarkingCode1);
             int result = dm.Ms_SqlQry(qry);
 
-            return result.ToString();
+            return (1).ToString();
         }
 
         [WebMethod(EnableSession = true)]
