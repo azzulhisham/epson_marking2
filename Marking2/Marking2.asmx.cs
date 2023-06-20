@@ -27,7 +27,9 @@ namespace Marking2
         [WebMethod(EnableSession = true)]
         public string AboutMe()
         {
-            return "Service generate Upper Marking Code for Automotive PX.";
+            DataModel dm = new DataModel();
+
+            return "Serial Marking Code service. Database Status: [" + dm.CheckDatabase() + "]";
         }
 
         [WebMethod(EnableSession=true)]

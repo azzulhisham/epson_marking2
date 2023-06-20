@@ -36,8 +36,10 @@ namespace Marking2
     {
         static string GetConnString()
         {
+            // "Server=" + @"172.16.59.254\SQLEXPRESS" + "; " +
+
             string sConnStr =
-                    "Server=" + @"172.16.59.254\SQLEXPRESS" + "; " +
+                    "Server=" + @"20.10.30.2\SQLEXPRESS" + "; " +
                     "DataBase=" + "Marking" + "; " +
                     "user id=" + "vb-sql" + ";" +
                     "password=" + "Anyn0m0us";
@@ -116,6 +118,37 @@ namespace Marking2
 
                 SqlDataReader Reader = _qrycmd.ExecuteReader();
                 _ret = Reader.RecordsAffected;
+            }
+            catch (Exception Ex)
+            {
+                string msg = Ex.Message;
+                _ret = -1;
+            }
+            finally
+            {
+                dbConnection.Close();
+            }
+
+            return _ret;
+        }
+
+        public int CheckDatabase()
+        {
+            int _ret = 0;
+            String sqlName = "Marking";
+            string sConnStr = GetConnString();
+
+            SqlConnection dbConnection = new SqlConnection(sConnStr);
+            string _qry = "IF NOT EXISTS (SELECT * FROM Sys.DATABASES WHERE Name='" +
+                sqlName + "') " +
+                "CREATE DATABASE [" + sqlName + "]";
+
+
+            try
+            {
+                dbConnection.Open();
+                SqlCommand _qrycmd = new SqlCommand(_qry, dbConnection);
+                _qrycmd.ExecuteNonQuery();
             }
             catch (Exception Ex)
             {
